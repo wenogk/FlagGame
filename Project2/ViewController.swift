@@ -70,7 +70,7 @@ class ViewController: UIViewController {
             title="Correct"
         } else{
             score -= 1;
-            title = "Wrong"
+            title = "Wrong! That’s the flag of \(countries[sender.tag].uppercased())"
         }
         
         let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert);
