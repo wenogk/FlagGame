@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         askQuestion()
     }
     
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction! = nil) {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         button1.setImage(UIImage(named: countries[0]), for: .normal);
@@ -70,6 +70,7 @@ class ViewController: UIViewController {
         
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         
+        present(ac,animated: true)
     }
     
 }
