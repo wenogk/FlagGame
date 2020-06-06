@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     var countries = [String]();
     var score: Int = 0;
     var correctAnswer: Int = 0;
+    var numberOfAnsweredQuestions: Int = 0;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         countries.append("estonia");
@@ -47,18 +49,23 @@ class ViewController: UIViewController {
     }
     
     func askQuestion(action: UIAlertAction! = nil) {
-        countries.shuffle()
-        correctAnswer = Int.random(in: 0...2)
-        button1.setImage(UIImage(named: countries[0]), for: .normal);
-        button2.setImage(UIImage(named: countries[1]), for: .normal);
-        button3.setImage(UIImage(named: countries[2]), for: .normal);
-        title = countries[correctAnswer].uppercased() + " (Score: \(score))";
+        if(numberOfAnsweredQuestions<9) {
+            countries.shuffle()
+            correctAnswer = Int.random(in: 0...2)
+            button1.setImage(UIImage(named: countries[0]), for: .normal);
+            button2.setImage(UIImage(named: countries[1]), for: .normal);
+            button3.setImage(UIImage(named: countries[2]), for: .normal);
+            title = countries[correctAnswer].uppercased() + " (Score: \(score))";
+        }
+        numberOfAnsweredQuestions+=1;
     }
 
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
         
-        if(sender.tag == correctAnswer) {
+        if(numberOfAnsweredQuestions>8) {
+            title="Game Over"
+        } else if(sender.tag == correctAnswer) {
             score += 1;
             title="Correct"
         } else{
